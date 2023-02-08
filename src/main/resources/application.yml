@@ -19,14 +19,6 @@ spring:
   sql:
     init:
       mode: always
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: 974139249463-v5cimvdci4b9a76hqnh4mg02kqvi3nee.apps.googleusercontent.com
-#            client-secret: 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
-#            scope: profile,email
 jwt:
   header: Authorization
   secret: Z2RzYy1za2h1LWphdmEtYmFja2VuZC1qd3Qtc3R1ZHktZGVjZW1iZXItMjh0aC1oYW5naWxsZWU=
