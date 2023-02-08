@@ -1,0 +1,39 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/solution_challenge
+    username: root
+    password: gusqhr12@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: 974139249463-v5cimvdci4b9a76hqnh4mg02kqvi3nee.apps.googleusercontent.com
+#            client-secret: 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
+#            scope: profile,email
+jwt:
+  header: Authorization
+  secret: Z2RzYy1za2h1LWphdmEtYmFja2VuZC1qd3Qtc3R1ZHktZGVjZW1iZXItMjh0aC1oYW5naWxsZWU=
+  token-validity-in-milliseconds: 86400000
+
+logging:
+  level:
+    com:
+      example:
+        mini_project_b: DEBUG
