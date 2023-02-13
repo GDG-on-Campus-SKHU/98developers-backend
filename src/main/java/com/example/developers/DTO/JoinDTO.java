@@ -3,6 +3,8 @@ package com.example.developers.DTO;
 import com.example.developers.domain.Member;
 import lombok.Data;
 
+import java.util.Collections;
+
 @Data
 public class JoinDTO {
     private String userName;
@@ -12,6 +14,7 @@ public class JoinDTO {
         return Member.builder()
                 .userName(userName)
                 .password(password)
+                .roles(Collections.singletonList("USER"))
                 .build();
     }
 }
