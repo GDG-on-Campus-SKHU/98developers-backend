@@ -25,15 +25,15 @@ public class Connecting {
     @Column(name = "tag", nullable = false, length = 150)
     private String tag;
 
-    @Column(name = "location", nullable = false, length = 150)
+    @Column(name = "location", nullable = true, length = 150)
     private String location;
 
-    @Column(name = "phone_number", nullable = false, length = 150)
+    @Column(name = "phone_number", nullable = true, length = 150)
     private String phone_number;
 
-    @Column(name = "homepage", nullable = false, length = 150)
+    @Column(name = "homepage", nullable = true, length = 150)
     private String homepage;
 
-    @Column(name = "image", nullable = false, length = 300)
+    @Column(name = "image", nullable = true, length = 300)
     private String image;
 }
