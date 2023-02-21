@@ -63,6 +63,13 @@ public class ConnectingService {
                 return ;
             }
 
+            Elements selectsNavi = document.select("nav.map-inner ul.pagination li.active");
+            if (Integer.parseInt(selectsNavi.text()) != i)
+                break;
+
+            System.out.println("selectsNavi = " + selectsNavi.text());
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^리얼 있음 = "+ i + "번째임 리얼");
+
 
 
             Elements selects = document.select("div.map-list-wrap");
@@ -95,12 +102,7 @@ public class ConnectingService {
                 }
             }
 
-            Elements selectsNavi = document.select("nav.map-inner ul.pagination li.active");
-            if (Integer.parseInt(selectsNavi.text()) != i)
-                break;
 
-            System.out.println("selectsNavi = " + selectsNavi.text());
-            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^리얼 있음 = "+ i + "번째임 리얼");
             i++;
         }
     }
