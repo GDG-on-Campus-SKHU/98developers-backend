@@ -1,5 +1,6 @@
 package com.example.developers.domain;
 
+import com.example.developers.DTO.ConnectingDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,4 +37,15 @@ public class Connecting {
 
     @Column(name = "image", nullable = true, length = 300)
     private String image;
+
+    public ConnectingDTO toDTO() {
+        return ConnectingDTO.builder()
+                .store(store)
+                .tag(tag)
+                .location(location)
+                .phone_number(phone_number)
+                .homepage(homepage)
+                .image(image)
+                .build();
+    }
 }

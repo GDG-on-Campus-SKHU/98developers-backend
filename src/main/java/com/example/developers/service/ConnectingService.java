@@ -17,12 +17,23 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
 @RequiredArgsConstructor
 public class ConnectingService {
     private final ConnectingRepository connectingRepository;
+
+
+    @Transactional
+    public List<ConnectingDTO> findAllConnecting() {
+        List<Connecting> connectings = connectingRepository.findAll();
+
+        return connectings.stream()
+                .map(Connecting::toDTO)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public void save(ConnectingDTO dto){
