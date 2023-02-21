@@ -40,6 +40,7 @@ public class Connecting {
 
     public ConnectingDTO toDTO() {
         return ConnectingDTO.builder()
+                .id(id)
                 .store(store)
                 .tag(tag)
                 .location(location)
