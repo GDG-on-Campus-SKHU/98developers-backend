@@ -101,7 +101,12 @@ public class ExploreService {
 //                    System.out.println("phone: "+k.select("p.tell a").text().replaceAll("phone number",""));
 //                    System.out.println("img: "+k.select("a div.thumb img").attr("src"));
 //                    System.out.println("tag: "+k.select("a._fade_link em").html());
-
+                    HashMap<String, Double> location =
+                            (HashMap<String, Double>)
+                                    new GoogleGeocodingService().Geocoding(k.select("p.adress").html());
+                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    System.out.println("lng = " + location.get("lng"));
+                    System.out.println("lat = " + location.get("lat"));
 
                     save(ExploreDTO.builder()
                         .name(k.select("div.tit").html())
@@ -109,8 +114,8 @@ public class ExploreService {
                         .tele(k.select("p.tell a").text().replaceAll("phone number",""))
                         .image(k.select("a div.thumb img").attr("src"))
                         .tag(k.select("a._fade_link em").html())
-                        .latitude(0)
-                        .longitude(0)
+                        .latitude(location.get("lat"))
+                        .longitude(location.get("lng"))
                         .build());
 
 //                    System.out.println("@@@@@@@@@@@@@@@@@@@");

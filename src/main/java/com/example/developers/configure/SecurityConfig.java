@@ -18,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-//    private final CustomOAuth2UserService customOAuth2UserService;
     private final TokenProvider tokenProvider;
 
     @Bean
@@ -29,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()// Request에 인증, 인가(권한 있냐?)를 부여하겠다.
-                .antMatchers("/signup","/index", "/signin", "/crawling/**", "/connecting").permitAll()  // /index /login 은 인가가 필요없다.
+                .antMatchers("/signup","/index", "/signin", "/crawling/**", "/explore").permitAll()  // /index /login 은 인가가 필요없다.
                 .antMatchers("/user").hasAnyRole("USER")// /user  uri는 USER 롤 또는 ADMIN 롤이 있어야 접속가능
                 .anyRequest().authenticated() // 그 외에는 인증된 모든 사용자가 URL을 허용하도록 지정합니다.
                 .and()
