@@ -3,9 +3,7 @@ package com.example.developers.controller;
 import com.example.developers.DTO.JoinDTO;
 import com.example.developers.DTO.LoginDTO;
 import com.example.developers.DTO.TokenDTO;
-import com.example.developers.domain.Member;
-import com.example.developers.repository.MemberRepository;
-import com.example.developers.service.ConnectingService;
+import com.example.developers.service.ExploreService;
 import com.example.developers.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,21 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.Collections;
-
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
 
-    private final ConnectingService connectingService;
+    private final ExploreService exploreService;
 
     @GetMapping("/crawling/sparrowClub")
-    public ResponseEntity<String> testing(){
-        connectingService.crawlingSparrowClub();
+    public ResponseEntity<String> testing() throws Exception {
+        exploreService.crawlingSparrowClub();
         return ResponseEntity.ok("crawling success");
     }
 

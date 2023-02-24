@@ -1,8 +1,9 @@
 package com.example.developers.service;
 
-import com.example.developers.DTO.ConnectingDTO;
-import com.example.developers.domain.Connecting;
-import com.example.developers.repository.ConnectingRepository;
+import com.example.developers.DTO.ExploreDTO;
+import com.example.developers.domain.Explore;
+import com.example.developers.google.GoogleGeocodingService;
+import com.example.developers.repository.ExploreRepository;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -15,49 +16,51 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @Service
 @RequiredArgsConstructor
-public class ConnectingService {
-    private final ConnectingRepository connectingRepository;
+public class ExploreService {
+    private final ExploreRepository exploreRepository;
 
 
     @Transactional
-    public List<ConnectingDTO> findAllConnecting() {
-        List<Connecting> connectings = connectingRepository.findAll();
+    public List<ExploreDTO> findAllConnecting() {
+        List<Explore> explores = exploreRepository.findAll();
 
-        return connectings.stream()
-                .map(Connecting::toDTO)
+        return explores.stream()
+                .map(Explore::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public void save(ConnectingDTO dto){
-        if(connectingRepository.findByStore(dto.getStore()).size() != 0) {
-            List<Connecting> find = connectingRepository.findByTag(dto.getTag());
-            for(Connecting connecting : find)
-                if (dto.getStore() == connecting.getStore())
+    public void save(ExploreDTO dto){
+        if(exploreRepository.findByName(dto.getName()).size() != 0) {
+            List<Explore> find = exploreRepository.findByTag(dto.getTag());
+            for(Explore explore : find)
+                if (dto.getName() == explore.getName())
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND,"이미 존재하는 가게입니다.");
 
             System.out.println("@@@@@@@@@@@@@@@@@@@이미 존재하는 가게입니다.");
         }
-        connectingRepository.save(
-                Connecting.builder()
-                        .store(dto.getStore())
-                        .location(dto.getLocation())
-                        .phone_number(dto.getPhone_number())
+        exploreRepository.save(
+                Explore.builder()
+                        .name(dto.getName())
+                        .address(dto.getAddress())
+                        .tele(dto.getTele())
                         .image(dto.getImage())
                         .tag(dto.getTag())
+                        .latitude(dto.getLatitude())
+                        .longitude(dto.getLongitude())
                         .build()
         );
     }
 
     @Transactional
-    public void crawlingSparrowClub(){
+    public void crawlingSparrowClub() throws Exception {
         int i = 1;
         while(true) {
             String url = "https://ppseoul.com/map/?sort=TIME&keyword_type=all&page="+ i;
@@ -100,13 +103,14 @@ public class ConnectingService {
 //                    System.out.println("tag: "+k.select("a._fade_link em").html());
 
 
-                save(ConnectingDTO.builder()
-                        .store(k.select("div.tit").html())
-                        .location(k.select("p.adress").html())
-                        .phone_number(k.select("p.tell a").text().replaceAll("phone number",""))
-                        .homepage("")
+                    save(ExploreDTO.builder()
+                        .name(k.select("div.tit").html())
+                        .address(k.select("p.adress").html())
+                        .tele(k.select("p.tell a").text().replaceAll("phone number",""))
                         .image(k.select("a div.thumb img").attr("src"))
                         .tag(k.select("a._fade_link em").html())
+                        .latitude(0)
+                        .longitude(0)
                         .build());
 
 //                    System.out.println("@@@@@@@@@@@@@@@@@@@");

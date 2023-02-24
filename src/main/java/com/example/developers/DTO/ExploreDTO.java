@@ -2,24 +2,26 @@ package com.example.developers.DTO;
 
 import lombok.*;
 
-
 @Data
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConnectingDTO {
+public class ExploreDTO {
     private Long id;
 
-    private String store;
+    private String name;
 
     private String tag;
 
-    private String location;
+    private String address;
 
-    private String phone_number;
-
-    private String homepage;
+    private String tele;
 
     private String image;
+
+    private double latitude;
+
+    private double longitude;
+
 }
