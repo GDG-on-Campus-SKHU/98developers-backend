@@ -19,6 +19,8 @@ spring:
   sql:
     init:
       mode: always
+  google:
+    api:
 jwt:
   header: Authorization
   secret: Z2RzYy1za2h1LWphdmEtYmFja2VuZC1qd3Qtc3R1ZHktZGVjZW1iZXItMjh0aC1oYW5naWxsZWU=

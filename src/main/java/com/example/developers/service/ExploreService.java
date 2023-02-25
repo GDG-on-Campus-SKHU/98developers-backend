@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 public class ExploreService {
     private final ExploreRepository exploreRepository;
 
+    private final GoogleGeocodingService googleGeocodingService;
+
 
     @Transactional
     public List<ExploreDTO> findAllConnecting() {
@@ -102,8 +104,7 @@ public class ExploreService {
 //                    System.out.println("img: "+k.select("a div.thumb img").attr("src"));
 //                    System.out.println("tag: "+k.select("a._fade_link em").html());
                     HashMap<String, Double> location =
-                            (HashMap<String, Double>)
-                                    new GoogleGeocodingService().Geocoding(k.select("p.adress").html());
+                            (HashMap<String, Double>) googleGeocodingService.geocoding(k.select("p.adress").html());
                     System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                     System.out.println("lng = " + location.get("lng"));
                     System.out.println("lat = " + location.get("lat"));

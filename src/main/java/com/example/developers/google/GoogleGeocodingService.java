@@ -7,19 +7,27 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class GoogleGeocodingService {
 
-    @Transactional
-    public Map<String, Double> Geocoding(String address) throws Exception {
-        GeoApiContext context = new GeoApiContext().setApiKey("google API 키");
+    @Value("${spring.google.api}")
+    private String api;
+
+//    private GeoApiContext context ;
+
+
+    public Map<String, Double> geocoding(
+            String address
+    ) throws Exception {
+//        System.out.println("@@@@@@@@@@@@@@@@@@@ "+ api);
+        GeoApiContext context = new GeoApiContext().setApiKey(api);
         GeocodingResult[] results =  GeocodingApi.geocode(context, address).await();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         System.out.println("Address = "+ address);
@@ -28,7 +36,6 @@ public class GoogleGeocodingService {
         location.put("lat", results[0].geometry.location.lat);
         location.put("lng", results[0].geometry.location.lng);
 
-// Invoke .shutdown() after your application is done making requests
         return location;
     }
 
