@@ -29,7 +29,7 @@ public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public TokenDTO login(String memberId, String password) {
@@ -47,7 +47,10 @@ public class MemberService implements UserDetailsService {
         if(memberRepository.findByUserName(joinRequestDTO.getUserName()).isPresent()) {
             throw new IllegalStateException("이미 존재하는 아이디입니다.");
         }
-        joinRequestDTO.setPassword(passwordEncoder.encode(joinRequestDTO.getPassword()));
+        joinRequestDTO.setPassword(
+                joinRequestDTO.getPassword()
+//                passwordEncoder.encode(joinRequestDTO.getPassword())
+        );
         memberRepository.save(joinRequestDTO.toEntity());
     }
 
@@ -80,6 +83,7 @@ public class MemberService implements UserDetailsService {
                 .name(firebaseToken.getName())
                 .picture(firebaseToken.getPicture())
                 .roles(Collections.singletonList("USER"))
+                .password("")
                 .build();
         memberRepository.save(member);
         return member;

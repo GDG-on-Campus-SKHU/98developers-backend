@@ -16,7 +16,7 @@ public class JwtUserDetailsService
 //        implements UserDetailsService
 {
     private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
     // USer 찾아서 UserDeails 객체 형식으로 return
 //    @Override

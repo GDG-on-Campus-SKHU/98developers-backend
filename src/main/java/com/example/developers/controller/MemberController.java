@@ -38,7 +38,7 @@ public class MemberController {
 
     private final FirebaseAuth firebaseAuth;
 
-    @PostMapping("")
+    @PostMapping("/users")
     public MemberDTO register(@RequestHeader("Authorization") String authorization) {
         // TOKEN을 가져온다.
         log.info("POSTTTTTTTTTTTTTTTTTTTTTTTTTT");
@@ -57,7 +57,7 @@ public class MemberController {
         return new MemberDTO(registeredUser);
     }
 
-    @GetMapping("/me")
+    @GetMapping("/users/me")
     public MemberDTO getUserMe(Authentication authentication) {
         log.info("GETTTTTTTTTTTTTTTTTTTT");
         Member member = ((Member) authentication.getPrincipal());
