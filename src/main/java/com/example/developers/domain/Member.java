@@ -25,7 +25,7 @@ public class Member implements UserDetails {
     @Id
     private int id;
 
-    @Column(updatable = false, unique = true, nullable = false)
+    @Column(name = "username", updatable = false, unique = true, nullable = false)
     private String userName;
 
     @Column
