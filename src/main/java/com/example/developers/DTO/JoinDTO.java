@@ -13,7 +13,6 @@ public class JoinDTO {
     public Member toEntity() {
         return Member.builder()
                 .userName(userName)
-                .password(password)
                 .roles(Collections.singletonList("USER"))
                 .build();
     }

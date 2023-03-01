@@ -28,6 +28,14 @@ public class Member implements UserDetails {
     @Column(updatable = false, unique = true, nullable = false)
     private String userName;
 
+    @Column
+    private String email;
+    @Column
+    private String name;
+
+    @Column
+    private String picture;
+
     @Column(nullable = false)
     private String password;
 
@@ -50,7 +58,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return null;
     }
 
     // 참고 https://zgundam.tistory.com/49
