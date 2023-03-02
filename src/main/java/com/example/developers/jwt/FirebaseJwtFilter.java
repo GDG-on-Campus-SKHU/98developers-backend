@@ -49,21 +49,23 @@ public class FirebaseJwtFilter extends OncePerRequestFilter {
 
         log.info("DecodedToken "+decodedToken.getEmail()+" "+decodedToken.getUid());
         // User를 가져와 SecurityContext에 저장한다.
+        UserDetails user;
         try{
-            UserDetails user = userDetailsService.loadUserByUsername(decodedToken.getUid());
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            user = userDetailsService.loadUserByUsername(decodedToken.getUid());
+
         } catch(NoSuchElementException e){
             log.info("TESTTTTTTTTTTTTTTTTTTTTT");
             log.info("DecodedToken "+decodedToken.getEmail()+" "+decodedToken.getUid());
             memberService.save(decodedToken);
             // ErrorMessage 응답 전송
-            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
-            response.setContentType("application/json");
-            response.getWriter().write("{\"code\":\"USER_NOT_FOUND\"}");
+//            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+//            response.setContentType("application/json");
+//            response.getWriter().write("{\"code\":\"USER_NOT_FOUND\"}");
         }
-
+        user = userDetailsService.loadUserByUsername(decodedToken.getUid());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                user, null, user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
 }
