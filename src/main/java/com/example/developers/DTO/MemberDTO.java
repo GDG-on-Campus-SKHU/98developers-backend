@@ -5,15 +5,15 @@ import lombok.Data;
 
 @Data
 public class MemberDTO {
-    private String username;
+    private String uid;
     private String email;
     private String name;
-    private String picture;
+    private String avatar;
 
     public MemberDTO(Member member) {
-        this.username = member.getUsername();
+        this.uid = member.getUsername();
         this.email = member.getEmail();
         this.name = member.getName();
-        this.picture = member.getPicture();
+        this.avatar = member.getAvatar();
     }
 }

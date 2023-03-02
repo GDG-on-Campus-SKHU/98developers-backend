@@ -29,30 +29,6 @@ public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-//    private final PasswordEncoder passwordEncoder;
-
-    @Transactional
-    public TokenDTO login(String memberId, String password) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberId, password);
-
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-
-        TokenDTO tokenDTO = tokenProvider.createToken(authentication);
-
-        return tokenDTO;
-    }
-
-    @Transactional
-    public void join(JoinDTO joinRequestDTO) {
-        if(memberRepository.findByUserName(joinRequestDTO.getUserName()).isPresent()) {
-            throw new IllegalStateException("이미 존재하는 아이디입니다.");
-        }
-        joinRequestDTO.setPassword(
-                joinRequestDTO.getPassword()
-//                passwordEncoder.encode(joinRequestDTO.getPassword())
-        );
-        memberRepository.save(joinRequestDTO.toEntity());
-    }
 
     @Transactional(readOnly = true)
     public Member findByUsername(String username) {
@@ -70,7 +46,7 @@ public class MemberService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public Member loadUserByUsername(String username) throws UsernameNotFoundException {
-        return memberRepository.findByUserName(username)
+        return memberRepository.findByUid(username)
                 .orElseThrow(() -> new NoSuchElementException(String.format("해당 유저(%s)를 찾을 수 없습니다.", username)));
     }
 
@@ -78,10 +54,10 @@ public class MemberService implements UserDetailsService {
     public Member save(FirebaseToken firebaseToken) {
         log.info("FirebaseTOken ---- "+ firebaseToken.getEmail()+ " "+ firebaseToken.getUid());
         Member member = Member.builder()
-                .userName(firebaseToken.getUid())
+                .uid(firebaseToken.getUid())
                 .email(firebaseToken.getEmail())
                 .name(firebaseToken.getName())
-                .picture(firebaseToken.getPicture())
+                .avatar(firebaseToken.getPicture())
                 .roles(Collections.singletonList("USER"))
                 .password("")
                 .build();

@@ -68,23 +68,6 @@ public class MemberController {
 
 
 
-    // /login 페이지 이동
-    @PostMapping("/signin")
-    public TokenDTO login(@RequestBody LoginDTO memberLoginRequestDto) {
-        String memberId = memberLoginRequestDto.getUserName();
-        String password = memberLoginRequestDto.getPassword();
-        TokenDTO tokenDTO = memberService.login(memberId, password);
-        return tokenDTO;
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<String> join(@RequestBody JoinDTO joinRequestDto) {
-        memberService.join(joinRequestDto);
-        return ResponseEntity.ok("join success");
-    }
-
-
-
     @GetMapping("/admin")
     public ResponseEntity<String> admin() {
         return ResponseEntity.ok("admin");

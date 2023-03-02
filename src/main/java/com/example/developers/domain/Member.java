@@ -25,8 +25,8 @@ public class Member implements UserDetails {
     @Id
     private int id;
 
-    @Column(name = "username", updatable = false, unique = true, nullable = false)
-    private String userName;
+    @Column(name = "uid", updatable = false, unique = true, nullable = false)
+    private String uid;
 
     @Column
     private String email;
@@ -34,7 +34,7 @@ public class Member implements UserDetails {
     private String name;
 
     @Column
-    private String picture;
+    private String avatar;
 
     @Column(nullable = false)
     private String password;
@@ -53,7 +53,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return uid;
     }
 
     @Override
