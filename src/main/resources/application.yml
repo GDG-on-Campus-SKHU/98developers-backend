@@ -20,7 +20,7 @@ spring:
     init:
       mode: always
   google:
-    api:
+    api: ${GOOGLE_API}
   firebase:
     key: ${FIRE_KEY}
 jwt:
