@@ -38,26 +38,26 @@ public class MemberController {
 
     private final FirebaseAuth firebaseAuth;
 
-    @PostMapping("/users")
-    public MemberDTO register(@RequestHeader("Authorization") String authorization) {
-        // TOKEN을 가져온다.
-        log.info("POSTTTTTTTTTTTTTTTTTTTTTTTTTT");
-        FirebaseToken decodedToken;
-        try {
-            String token = RequestUtil.getAuthorizationToken(authorization);
-            decodedToken = firebaseAuth.verifyIdToken(token);
-        } catch (IllegalArgumentException | FirebaseAuthException e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
-                    "{\"code\":\"INVALID_TOKEN\", \"message\":\"" + e.getMessage() + "\"}");
-        }
-        // 사용자를 등록한다.
-        Member registeredUser = memberService.findByUsername(decodedToken.getUid());
-        log.info("++++++ " + registeredUser);
+//    @PostMapping("/users")
+//    public MemberDTO register(@RequestHeader("Authorization") String authorization) {
+//        // TOKEN을 가져온다.
+//        log.info("POSTTTTTTTTTTTTTTTTTTTTTTTTTT");
+//        FirebaseToken decodedToken;
+//        try {
+//            String token = RequestUtil.getAuthorizationToken(authorization);
+//            decodedToken = firebaseAuth.verifyIdToken(token);
+//        } catch (IllegalArgumentException | FirebaseAuthException e) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+//                    "{\"code\":\"INVALID_TOKEN\", \"message\":\"" + e.getMessage() + "\"}");
+//        }
+//        // 사용자를 등록한다.
+//        Member registeredUser = memberService.findByUsername(decodedToken.getUid());
+//        log.info("++++++ " + registeredUser);
+//
+//        return new MemberDTO(registeredUser);
+//    }
 
-        return new MemberDTO(registeredUser);
-    }
-
-    @GetMapping("/users/me")
+    @GetMapping("/users")
     public MemberDTO getUserMe(Authentication authentication) {
         log.info("GETTTTTTTTTTTTTTTTTTTT");
         Member member = ((Member) authentication.getPrincipal());

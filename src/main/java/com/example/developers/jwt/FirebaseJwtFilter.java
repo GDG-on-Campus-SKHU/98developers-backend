@@ -49,9 +49,8 @@ public class FirebaseJwtFilter extends OncePerRequestFilter {
 
         log.info("DecodedToken "+decodedToken.getEmail()+" "+decodedToken.getUid());
         // User를 가져와 SecurityContext에 저장한다.
-        UserDetails user;
         try{
-            user = userDetailsService.loadUserByUsername(decodedToken.getUid());
+            memberService.updateByUsername(decodedToken);
 
         } catch(NoSuchElementException e){
             log.info("TESTTTTTTTTTTTTTTTTTTTTT");
@@ -62,7 +61,7 @@ public class FirebaseJwtFilter extends OncePerRequestFilter {
 //            response.setContentType("application/json");
 //            response.getWriter().write("{\"code\":\"USER_NOT_FOUND\"}");
         }
-        user = userDetailsService.loadUserByUsername(decodedToken.getUid());
+        UserDetails user = userDetailsService.loadUserByUsername(decodedToken.getUid());
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);

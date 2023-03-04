@@ -49,6 +49,14 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findByUid(username)
                 .orElseThrow(() -> new NoSuchElementException(String.format("해당 유저(%s)를 찾을 수 없습니다.", username)));
     }
+    @Transactional
+    public Member updateByUsername(FirebaseToken firebaseToken) {
+        Member user = loadUserByUsername(firebaseToken.getUid());
+
+        user.update(firebaseToken);
+
+        return memberRepository.save(user);
+    }
 
     @Transactional
     public Member save(FirebaseToken firebaseToken) {
