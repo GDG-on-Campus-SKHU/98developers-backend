@@ -1,9 +1,6 @@
 package com.example.developers.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,10 +36,6 @@ public class Challenge {
     private Date date;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<MemberChallenge> postHashtags = new ArrayList<>();
-
-    public void setPostHashtags(List<MemberChallenge> postHashtags) {
-        this.postHashtags = postHashtags;
-    }
+    private List<MemberChallenge> memberChallenges = new ArrayList<>();
 
 }

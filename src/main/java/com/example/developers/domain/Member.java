@@ -1,5 +1,6 @@
 package com.example.developers.domain;
 
+import com.google.firebase.auth.FirebaseToken;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,7 +41,7 @@ public class Member implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<MemberChallenge> postHashtags = new ArrayList<>();
+    private List<MemberChallenge> memberChallenges = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -51,6 +52,13 @@ public class Member implements UserDetails {
         return this.roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+    }
+
+    public void update(FirebaseToken token) {
+        this.uid = token.getUid();
+        this.email = token.getEmail();
+        this.name = token.getName();
+        this.avatar = token.getPicture();
     }
 
     @Override
