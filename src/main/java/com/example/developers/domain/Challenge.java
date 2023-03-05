@@ -1,5 +1,6 @@
 package com.example.developers.domain;
 
+import com.example.developers.DTO.ChallengeDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,5 +38,16 @@ public class Challenge {
 
     @OneToMany(mappedBy = "challenge", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<MemberChallenge> memberChallenges = new ArrayList<>();
+
+    public ChallengeDTO toDTO() {
+        return ChallengeDTO.builder()
+                .id(id)
+                .authMethod(authMethod)
+                .caution(caution)
+                .date(date)
+                .expectedEffects(expectedEffects)
+                .goal(goal)
+                .build();
+    }
 
 }
