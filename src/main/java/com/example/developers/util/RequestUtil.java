@@ -1,10 +1,13 @@
 package com.example.developers.util;
 
-import javax.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
+@Slf4j
 public class RequestUtil {
 
     public static String getAuthorizationToken(String header) {
+        log.info("$!$!$!$!$!$!$"+ header);
         header.replace("Bearer ", "");
         // Authorization: Bearer <access_token>
         if (header == null || !header.startsWith("Bearer ")) {
