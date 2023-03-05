@@ -61,7 +61,8 @@ public class MemberController {
     public MemberDTO getUserMe(Authentication authentication) {
         log.info("GETTTTTTTTTTTTTTTTTTTT");
         Member member = ((Member) authentication.getPrincipal());
-        log.info("{}"+member);
+        log.info("{}"+member.getUid());
+        log.info(member.getEmail());
         return new MemberDTO(member);
     }
 

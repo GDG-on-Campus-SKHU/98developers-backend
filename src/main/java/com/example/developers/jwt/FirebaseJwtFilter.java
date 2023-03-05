@@ -36,6 +36,8 @@ public class FirebaseJwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         // get the token from the request
         FirebaseToken decodedToken;
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@ "+ request);
+        log.info("!!!!!!!!!!!!!!!!!!!!!!!! "+response);
         try{
             String header = RequestUtil.getAuthorizationToken(request.getHeader("Authorization"));
             decodedToken = firebaseAuth.verifyIdToken(header);
