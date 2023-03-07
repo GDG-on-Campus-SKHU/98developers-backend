@@ -1,7 +1,9 @@
 package com.example.developers.service;
 
+import com.example.developers.domain.Challenge;
 import com.example.developers.domain.Member;
 import com.example.developers.domain.MemberChallenge;
+import com.example.developers.repository.ChallengeRepository;
 import com.example.developers.repository.MemberChallengeRepository;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -24,6 +26,7 @@ public class MemberChallengeService {
     private final Storage storage;
 
     private final MemberChallengeRepository memberChallengeRepository;
+    private final ChallengeService challengeService;
 
     // 회원 정보 수정
     public void updateMemberChallengeInfo(
@@ -50,6 +53,19 @@ public class MemberChallengeService {
         memberChallenge.imageUpdate("https://storage.googleapis.com/"+bucketName+"/"+uuid);
 
         memberChallengeRepository.save(memberChallenge);
+    }
+
+    public void attendMemberChallenge(Member member, Long challengeId) {
+        if(findByChallengeAndMember(challengeId, member.getId()) != null)
+            throw new ArrayIndexOutOfBoundsException("이미 존재함");
+        Challenge challenge = challengeService.findByChallenge(challengeId);
+        memberChallengeRepository.save(
+                MemberChallenge.builder()
+                        .challenge(challenge)
+                        .member(member)
+                        .isSuccess(false)
+                        .build()
+        );
     }
 
     public MemberChallenge findByChallengeAndMember(Long challengeId, int userId){

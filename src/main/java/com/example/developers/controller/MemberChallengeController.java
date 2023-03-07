@@ -30,4 +30,14 @@ public class MemberChallengeController {
 
         return ResponseEntity.ok("save user img");
     }
+
+    @PostMapping("/user/{challengeId}/attend")
+    public ResponseEntity<String> attendMemberChallenge(
+            Authentication authentication,
+            @PathVariable Long challengeId
+    ) {
+        Member member = ((Member) authentication.getPrincipal());
+        memberChallengeService.attendMemberChallenge(member, challengeId);
+        return ResponseEntity.ok("attend user challenge");
+    }
 }

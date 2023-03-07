@@ -1,6 +1,7 @@
 package com.example.developers.domain;
 
 import com.example.developers.DTO.ChallengeMemberDTO;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "user_challenge")
 public class MemberChallenge {
 
