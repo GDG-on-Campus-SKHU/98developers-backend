@@ -44,4 +44,6 @@ public class MemberChallenge {
                 .isSuccess(isSuccess)
                 .build();
     }
+
+
 }

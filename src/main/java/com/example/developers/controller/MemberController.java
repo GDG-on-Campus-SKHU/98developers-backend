@@ -61,9 +61,11 @@ public class MemberController {
     public MemberDTO getUserMe(Authentication authentication) {
         log.info("GETTTTTTTTTTTTTTTTTTTT");
         Member member = ((Member) authentication.getPrincipal());
-        log.info("{}"+member.getUid());
-        log.info(member.getEmail());
-        return member.toDTO();
+
+        MemberDTO memberDTO = memberService.findByMemberIdInChallenge(member);
+        log.info("{}"+memberDTO.getUid());
+        log.info(memberDTO.getEmail());
+        return memberDTO;
     }
 
 
