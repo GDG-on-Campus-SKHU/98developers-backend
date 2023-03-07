@@ -37,7 +37,7 @@ spring:
     gcp:
       storage:
         credentials:
-          location: file:${GCS_KEY}
+          location: file:${GOOGLE_APPLICATION_CREDENTIALS}
         project-id: lunar-alpha-372905
 
 jwt:
