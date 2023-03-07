@@ -39,7 +39,7 @@ public class MemberService implements UserDetailsService {
 
     public MemberDTO findByMemberIdInChallenge(Member user) {
         MemberDTO memberDTO = loadUserByUsername(user.getUid()).toDTO();
-        List<MemberChallenge> memberChallenge = memberChallengeRepository.findMemberChallengeByMemberId(1);
+        List<MemberChallenge> memberChallenge = memberChallengeRepository.findMemberChallengeByMemberId(user.getId());
         List<ChallengeDTO> addChallenge = new ArrayList<>();
         for(MemberChallenge m : memberChallenge)
             addChallenge.add(m.getChallenge().toDTO());
