@@ -33,10 +33,20 @@ spring:
     api: ${GOOGLE_API}
   firebase:
     key: ${FIRE_KEY}
+  cloud:
+    gcp:
+      storage:
+        credentials:
+          location: file:${GCS_KEY}
+        project-id: lunar-alpha-372905
+
 jwt:
   header: Authorization
   secret: Z2RzYy1za2h1LWphdmEtYmFja2VuZC1qd3Qtc3R1ZHktZGVjZW1iZXItMjh0aC1oYW5naWxsZWU=
   token-validity-in-milliseconds: 86400000
+
+bucket:
+  name: zikiza
 
 logging:
   level:

@@ -31,4 +31,8 @@ public class MemberChallenge {
     @Column
     @ColumnDefault("false")
     private Boolean isSuccess;
+
+    public void imageUpdate(String imageSrc) {
+        this.image = imageSrc;
+    }
 }

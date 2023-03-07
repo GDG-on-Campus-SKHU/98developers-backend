@@ -3,12 +3,18 @@ package com.example.developers.controller;
 import com.example.developers.DTO.ChallengeDTO;
 import com.example.developers.DTO.ExploreDTO;
 import com.example.developers.DTO.MemberDTO;
+import com.example.developers.domain.Member;
+import com.example.developers.domain.MemberChallenge;
 import com.example.developers.service.ChallengeService;
+import com.example.developers.service.MemberChallengeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -16,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ChallengeController {
     private final ChallengeService challengeService;
+    private final MemberChallengeService memberChallengeService;
 
     @GetMapping("/challenges")
     public ResponseEntity<List<ChallengeDTO>> findAllChallenges (
@@ -50,5 +57,23 @@ public class ChallengeController {
     ) {
         challengeService.updateChallenge(challengeDTO);
         return ResponseEntity.ok("update challenge");
+    }
+
+    @PostMapping("/user/{challengeId}/takePhoto")
+    public ResponseEntity<String> saveImgUser(
+            Authentication authentication,
+            @PathVariable Long challengeId,
+            MultipartFile image
+    ) throws IOException {
+        Member member = ((Member) authentication.getPrincipal());
+        memberChallengeService.updateMemberChallengeInfo(member ,image, challengeId);
+
+        return ResponseEntity.ok("save user img");
+    }
+
+    @GetMapping("/findTest")
+    public ResponseEntity<String> findtest() {
+        MemberChallenge memberChallenge = memberChallengeService.findByChallengeAndMember(new Long(1),1);
+        return ResponseEntity.ok(memberChallenge.getChallenge().getId() + memberChallenge.getMember().getUid());
     }
 }

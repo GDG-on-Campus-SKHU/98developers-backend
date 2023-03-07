@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MemberChallengeRepository extends JpaRepository<MemberChallenge, Long> {
     List<Member> findAllByMember(Member member);
+    MemberChallenge findByChallengeIdAndMemberId(Long challengId, int userId);
 }
