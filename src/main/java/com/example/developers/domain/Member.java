@@ -1,5 +1,6 @@
 package com.example.developers.domain;
 
+import com.example.developers.DTO.MemberDTO;
 import com.google.firebase.auth.FirebaseToken;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,6 +60,15 @@ public class Member implements UserDetails {
         this.email = token.getEmail();
         this.name = token.getName();
         this.avatar = token.getPicture();
+    }
+
+    public MemberDTO toDTO() {
+        return MemberDTO.builder()
+                .uid(uid)
+                .email(email)
+                .name(name)
+                .avatar(avatar)
+                .build();
     }
 
     @Override
