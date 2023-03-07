@@ -1,5 +1,6 @@
 package com.example.developers.domain;
 
+import com.example.developers.DTO.ChallengeMemberDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -34,5 +35,13 @@ public class MemberChallenge {
 
     public void imageUpdate(String imageSrc) {
         this.image = imageSrc;
+    }
+
+    public ChallengeMemberDTO challengeToDTO() {
+        return ChallengeMemberDTO.builder()
+                .member(member.toDTO())
+                .image(image)
+                .isSuccess(isSuccess)
+                .build();
     }
 }

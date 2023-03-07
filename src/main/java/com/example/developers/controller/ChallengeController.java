@@ -33,15 +33,15 @@ public class ChallengeController {
                 .ok(challengeDTOS);
     }
 
-//    @GetMapping("/challenges/{challengeId}")
-//    public ResponseEntity<ChallengeDTO> findConnecting (
-//            @PathVariable Long challengeId
-//    ) {
-//        ChallengeDTO challengeDTO = challengeService.findByChallengeInMember(challengeId);
-//
-//        return ResponseEntity
-//                .ok(challengeDTO);
-//    }
+    @GetMapping("/challenges/{challengeId}")
+    public ResponseEntity<ChallengeDTO> findByChallengeId (
+            @PathVariable Long challengeId
+    ) {
+        ChallengeDTO challengeDTO = challengeService.findByChallengeInMember(challengeId);
+
+        return ResponseEntity
+                .ok(challengeDTO);
+    }
 
     @PostMapping("/api/challenge/save")
     public ResponseEntity<String> saveChallenge(

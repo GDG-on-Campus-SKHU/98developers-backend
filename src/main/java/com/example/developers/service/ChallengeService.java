@@ -1,13 +1,17 @@
 package com.example.developers.service;
 
 import com.example.developers.DTO.ChallengeDTO;
+import com.example.developers.DTO.MemberDTO;
 import com.example.developers.domain.Challenge;
+import com.example.developers.domain.Member;
+import com.example.developers.domain.MemberChallenge;
 import com.example.developers.repository.ChallengeRepository;
 import com.example.developers.repository.MemberChallengeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -26,10 +30,22 @@ public class ChallengeService {
                 .collect(Collectors.toList());
     }
 
-//    public ChallengeDTO findByChallengeInMember(Long challengeId) {
-//        Challenge challenge = findByChallenge(challengeId);
-//        return null;
-//    }
+    public ChallengeDTO findByChallengeInMember(Long challengeId) {
+        Challenge challenge = findByChallenge(challengeId);
+        ChallengeDTO challengeDTO = challenge.toDTO();
+        log.info("challenge = "+ challengeDTO.getTopic());
+        List<MemberChallenge> memberChallenge =
+                memberChallengeRepository.findMemberChallengeByChallengeId(challengeId);
+        log.info("findMemberChallengeByChallengeId = "+ memberChallenge.get(0).getMember().getUid()+ " "+ memberChallenge.get(1).getMember().getUid());
+
+        challengeDTO.setMembers(
+                memberChallenge.stream()
+                        .map(MemberChallenge::challengeToDTO)
+                        .collect(Collectors.toList())
+        );
+
+        return challengeDTO;
+    }
 
     public void saveChallenge(ChallengeDTO challengeDTO) {
         Challenge challenge = Challenge.builder()
