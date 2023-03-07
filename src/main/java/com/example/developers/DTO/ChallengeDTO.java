@@ -32,6 +32,6 @@ public class ChallengeDTO {
 
     private Date expiredDay; // 참가 신청 마지막 date
 
-    private List<ChallengeMemberDTO> memberS;
+    private List<ChallengeMemberDTO> members;
 
 }
