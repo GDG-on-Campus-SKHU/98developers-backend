@@ -6,8 +6,7 @@ import com.example.developers.service.ChallengeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,12 +16,27 @@ import java.util.List;
 public class ChallengeController {
     private final ChallengeService challengeService;
 
-    @GetMapping("/challenge")
-    public ResponseEntity<List<ChallengeDTO>> findAllConnecting (
+    @GetMapping("/challenges")
+    public ResponseEntity<List<ChallengeDTO>> findAllChallenges (
     ) {
         List<ChallengeDTO> challengeDTOS = challengeService.findAll();
 
         return ResponseEntity
                 .ok(challengeDTOS);
+    }
+    @PostMapping("/api/challenge/save")
+    public ResponseEntity<String> saveChallenge(
+            @RequestBody ChallengeDTO challengeDTO
+    ) {
+        challengeService.saveChallenge(challengeDTO);
+        return ResponseEntity.ok("save challenge");
+    }
+
+    @PatchMapping("/api/challenge/update")
+    ResponseEntity<String> updateChallenge(
+            @RequestBody ChallengeDTO challengeDTO
+    ) {
+        challengeService.updateChallenge(challengeDTO);
+        return ResponseEntity.ok("update challenge");
     }
 }
