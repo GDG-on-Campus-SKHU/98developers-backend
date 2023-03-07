@@ -3,6 +3,7 @@ package com.example.developers.service;
 import com.example.developers.DTO.ChallengeDTO;
 import com.example.developers.domain.Challenge;
 import com.example.developers.repository.ChallengeRepository;
+import com.example.developers.repository.MemberChallengeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ChallengeService {
     private final ChallengeRepository challengeRepository;
+    private final MemberChallengeRepository memberChallengeRepository;
 
     public List<ChallengeDTO> findAll() {
         List<Challenge> challenges = challengeRepository.findAll();
@@ -24,8 +26,12 @@ public class ChallengeService {
                 .collect(Collectors.toList());
     }
 
-    public void saveChallenge(ChallengeDTO challengeDTO) {
+//    public ChallengeDTO findByChallengeInMember(Long challengeId) {
+//        Challenge challenge = findByChallenge(challengeId);
+//        return null;
+//    }
 
+    public void saveChallenge(ChallengeDTO challengeDTO) {
         Challenge challenge = Challenge.builder()
                 .topic(challengeDTO.getTopic())
                 .howProof(challengeDTO.getHowProof())

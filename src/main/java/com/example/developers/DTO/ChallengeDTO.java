@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Getter
@@ -30,5 +31,7 @@ public class ChallengeDTO {
     private Date periodEndDate; // 인증 마지막 date
 
     private Date expiredDay; // 참가 신청 마지막 date
+
+    private List<ChallengeMemberDTO> memberS;
 
 }

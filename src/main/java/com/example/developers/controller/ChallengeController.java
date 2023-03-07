@@ -2,6 +2,7 @@ package com.example.developers.controller;
 
 import com.example.developers.DTO.ChallengeDTO;
 import com.example.developers.DTO.ExploreDTO;
+import com.example.developers.DTO.MemberDTO;
 import com.example.developers.service.ChallengeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,17 @@ public class ChallengeController {
         return ResponseEntity
                 .ok(challengeDTOS);
     }
+
+//    @GetMapping("/challenges/{challengeId}")
+//    public ResponseEntity<ChallengeDTO> findConnecting (
+//            @PathVariable Long challengeId
+//    ) {
+//        ChallengeDTO challengeDTO = challengeService.findByChallengeInMember(challengeId);
+//
+//        return ResponseEntity
+//                .ok(challengeDTO);
+//    }
+
     @PostMapping("/api/challenge/save")
     public ResponseEntity<String> saveChallenge(
             @RequestBody ChallengeDTO challengeDTO
