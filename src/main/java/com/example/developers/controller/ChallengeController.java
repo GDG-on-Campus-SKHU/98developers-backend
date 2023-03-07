@@ -59,21 +59,5 @@ public class ChallengeController {
         return ResponseEntity.ok("update challenge");
     }
 
-    @PostMapping("/user/{challengeId}/takePhoto")
-    public ResponseEntity<String> saveImgUser(
-            Authentication authentication,
-            @PathVariable Long challengeId,
-            MultipartFile image
-    ) throws IOException {
-        Member member = ((Member) authentication.getPrincipal());
-        memberChallengeService.updateMemberChallengeInfo(member ,image, challengeId);
 
-        return ResponseEntity.ok("save user img");
-    }
-
-    @GetMapping("/findTest")
-    public ResponseEntity<String> findtest() {
-        MemberChallenge memberChallenge = memberChallengeService.findByChallengeAndMember(new Long(1),1);
-        return ResponseEntity.ok(memberChallenge.getChallenge().getId() + memberChallenge.getMember().getUid());
-    }
 }
