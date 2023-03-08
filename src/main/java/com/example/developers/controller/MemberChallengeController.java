@@ -31,7 +31,7 @@ public class MemberChallengeController {
         return ResponseEntity.ok("save user img");
     }
 
-    @PostMapping("/user/{challengeId}/attend")
+    @PostMapping("/user/{challengeId}/enroll")
     public ResponseEntity<String> attendMemberChallenge(
             Authentication authentication,
             @PathVariable Long challengeId
