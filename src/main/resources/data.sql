@@ -8,7 +8,7 @@ insert into member_roles(member_id, roles) values (2, 'USER');
 
 insert into challenge(topic,
                       how_proof,
-                      collect_proof,
+                      correct_proof,
                       expected_results,
                       please_note,
                       period_start_date,

@@ -34,8 +34,8 @@ public class Challenge {
     @Column(name = "please_note")
     private String pleaseNote; // 주의 사항
 
-    @Column(name = "collect_proof")
-    private String collectProof; // 올바른 예시 이미지
+    @Column(name = "correct_proof")
+    private String correctProof; // 올바른 예시 이미지
 
     @Column(name = "period_start_date")
     private Date periodStartDate; // 인증 시작 date
@@ -55,7 +55,7 @@ public class Challenge {
                 .howProof(howProof)
                 .expectedResults(expectedResults)
                 .pleaseNote(pleaseNote)
-                .collectProof(collectProof)
+                .correctProof(correctProof)
                 .periodStartDate(periodStartDate)
                 .periodEndDate(periodEndDate)
                 .expiredDay(expiredDay)
@@ -67,7 +67,7 @@ public class Challenge {
         this.howProof = challengeDTO.getHowProof();
         this.expectedResults = challengeDTO.getExpectedResults();
         this.pleaseNote = challengeDTO.getPleaseNote();
-        this.collectProof = challengeDTO.getCollectProof();
+        this.correctProof = challengeDTO.getCorrectProof();
         this.periodStartDate = challengeDTO.getPeriodStartDate();
         this.periodEndDate = challengeDTO.getPeriodEndDate();
         this.expiredDay = challengeDTO.getExpiredDay();

@@ -53,7 +53,7 @@ public class ChallengeService {
                 .howProof(challengeDTO.getHowProof())
                 .expectedResults(challengeDTO.getExpectedResults())
                 .pleaseNote(challengeDTO.getPleaseNote())
-                .collectProof(challengeDTO.getCollectProof())
+                .correctProof(challengeDTO.getCorrectProof())
                 .periodStartDate(challengeDTO.getPeriodStartDate())
                 .periodEndDate(challengeDTO.getPeriodEndDate())
                 .expiredDay(challengeDTO.getExpiredDay())

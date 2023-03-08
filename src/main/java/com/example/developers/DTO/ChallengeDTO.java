@@ -24,7 +24,7 @@ public class ChallengeDTO {
 
     private String pleaseNote; // 주의 사항
 
-    private String collectProof; // 올바른 예시 이미지
+    private String correctProof; // 올바른 예시 이미지
 
     private Date periodStartDate; // 인증 시작 date
 
