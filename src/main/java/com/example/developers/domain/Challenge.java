@@ -51,6 +51,7 @@ public class Challenge {
 
     public ChallengeDTO toDTO() {
         return ChallengeDTO.builder()
+                .id(id)
                 .topic(topic)
                 .howProof(howProof)
                 .expectedResults(expectedResults)
