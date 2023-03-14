@@ -34,9 +34,9 @@ public class MemberChallengeService {
             MultipartFile image,
             Long challengeId
     ) throws IOException {
-//        MemberChallenge memberChallenge = findByChallengeAndMember(challengeId,member.getId());
-        MemberChallenge memberChallenge = findByChallengeAndMember(challengeId,1);
-
+        MemberChallenge memberChallenge = findByChallengeAndMember(challengeId,member.getId());
+//        MemberChallenge memberChallenge = findByChallengeAndMember(challengeId,1);
+        log.info("updateMemberChallengeInfo = "+ challengeId + " " + member.getEmail());
         // !!!!!!!!!!!이미지 업로드 관련 부분!!!!!!!!!!!!!!!
         String uuid = "user/" + UUID.randomUUID().toString(); // Google Cloud Storage에 저장될 파일 이름
         String ext = image.getContentType(); // 파일의 형식 ex) JPG
