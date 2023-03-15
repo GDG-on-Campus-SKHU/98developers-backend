@@ -96,6 +96,11 @@ public class ExploreService {
 
 
 //                    System.out.println("@@@@@@@@@@select = ");
+                    String[] isAddress = k.select("p.adress").html().split(" ");
+                    if("머신샵".compareTo(k.select("a._fade_link em").html()) == 0
+                            || isAddress.length <= 3
+                            || "".compareTo(k.select("a div.thumb img").attr("src")) == 0 )
+                        continue;
 //
 //
 //                    System.out.println("title: "+k.select("div.tit").html());
