@@ -38,9 +38,9 @@ public class MemberChallengeService {
 //        MemberChallenge memberChallenge = findByChallengeAndMember(challengeId,1);
         log.info("updateMemberChallengeInfo = "+ challengeId + " " + member.getEmail());
         // !!!!!!!!!!!이미지 업로드 관련 부분!!!!!!!!!!!!!!!
-        String uuid = "user/" + UUID.randomUUID().toString(); // Google Cloud Storage에 저장될 파일 이름
+        String uuid = "user/" + UUID.randomUUID().toString() + ".jpg"; // Google Cloud Storage에 저장될 파일 이름
         String ext = image.getContentType(); // 파일의 형식 ex) JPG
-        log.info("UUID" + uuid);
+        log.info("UUID" + uuid + " " + ext);
 
         // Cloud에 이미지 업로드
         BlobInfo blobInfo = storage.create(
