@@ -1,7 +1,7 @@
 package com.example.developers.domain;
 
 import com.example.developers.DTO.ChallengeDTO;
-import com.google.firebase.auth.FirebaseToken;
+import com.example.developers.DTO.ChallengesSimplyDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -60,6 +60,17 @@ public class Challenge {
                 .periodStartDate(periodStartDate)
                 .periodEndDate(periodEndDate)
                 .expiredDay(expiredDay)
+                .build();
+    }
+
+    public ChallengesSimplyDTO toSimpltDTO(){
+        return ChallengesSimplyDTO.builder()
+                .id(id)
+                .topic(topic)
+                .periodStartDate(periodStartDate)
+                .periodEndDate(periodEndDate)
+                .expiredDay(expiredDay)
+                .headCount(memberChallenges.size())
                 .build();
     }
 

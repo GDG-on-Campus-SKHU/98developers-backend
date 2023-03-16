@@ -1,6 +1,7 @@
 package com.example.developers.controller;
 
 import com.example.developers.DTO.ChallengeDTO;
+import com.example.developers.DTO.ChallengesSimplyDTO;
 import com.example.developers.DTO.ExploreDTO;
 import com.example.developers.DTO.MemberDTO;
 import com.example.developers.domain.Member;
@@ -25,9 +26,9 @@ public class ChallengeController {
     private final MemberChallengeService memberChallengeService;
 
     @GetMapping("/challenges")
-    public ResponseEntity<List<ChallengeDTO>> findAllChallenges (
+    public ResponseEntity<List<ChallengesSimplyDTO>> findAllChallenges (
     ) {
-        List<ChallengeDTO> challengeDTOS = challengeService.findAll();
+        List<ChallengesSimplyDTO> challengeDTOS = challengeService.findAll();
 
         return ResponseEntity
                 .ok(challengeDTOS);
