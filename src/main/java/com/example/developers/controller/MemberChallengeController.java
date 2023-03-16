@@ -23,7 +23,7 @@ public class MemberChallengeController {
     public ResponseEntity<String> saveImgUser(
             Authentication authentication,
             @PathVariable Long challengeId,
-            MultipartFile image
+            @RequestBody MultipartFile image
     ) throws IOException {
         Member member = ((Member) authentication.getPrincipal());
         memberChallengeService.updateMemberChallengeInfo(member ,image, challengeId);
