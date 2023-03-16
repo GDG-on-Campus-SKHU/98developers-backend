@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestUtil {
 
     public static String getAuthorizationToken(String header) {
-        log.info("$!$!$!$!$!$!$"+ header);
+        log.info("getAuthorizationToken HEAR = "+ header);
         header.replace("Bearer ", "");
         // Authorization: Bearer <access_token>
         if (header == null || !header.startsWith("Bearer ")) {

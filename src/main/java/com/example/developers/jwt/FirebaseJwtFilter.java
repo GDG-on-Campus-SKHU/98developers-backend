@@ -40,7 +40,7 @@ public class FirebaseJwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         // get the token from the request
         FirebaseToken decodedToken;
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@ "+ request.getHeader("Authorization"));
+        log.info("token api "+ request.getHeader("Authorization"));
         try{
             String header = RequestUtil.getAuthorizationToken(request.getHeader("Authorization"));
             decodedToken = firebaseAuth.verifyIdToken(header);
@@ -58,7 +58,7 @@ public class FirebaseJwtFilter extends OncePerRequestFilter {
             memberService.updateByUsername(decodedToken);
 
         } catch(NoSuchElementException e){
-            log.info("TESTTTTTTTTTTTTTTTTTTTTT");
+            log.info("User Sava");
             log.info("DecodedToken "+decodedToken.getEmail()+" "+decodedToken.getUid());
             memberService.save(decodedToken);
             // ErrorMessage 응답 전송
