@@ -34,8 +34,7 @@ public class ChallengeService {
         log.info("challenge = "+ challengeDTO.getTopic());
         List<MemberChallenge> memberChallenge =
                 memberChallengeRepository.findMemberChallengeByChallengeId(challengeId);
-        log.info("findMemberChallengeByChallengeId = "+ memberChallenge.get(0).getMember().getUid()+ " "+ memberChallenge.get(1).getMember().getUid());
-
+        
         challengeDTO.setMembers(
                 memberChallenge.stream()
                         .map(MemberChallenge::challengeToDTO)
