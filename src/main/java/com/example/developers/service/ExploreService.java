@@ -5,6 +5,7 @@ import com.example.developers.domain.Explore;
 import com.example.developers.google.GoogleGeocodingService;
 import com.example.developers.repository.ExploreRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ExploreService {
@@ -39,14 +40,15 @@ public class ExploreService {
     }
 
     @Transactional
-    public void save(ExploreDTO dto){
+    public void save(ExploreDTO dto) {
         if(exploreRepository.findByName(dto.getName()).size() != 0) {
             List<Explore> find = exploreRepository.findByTag(dto.getTag());
-            for(Explore explore : find)
-                if (dto.getName() == explore.getName())
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND,"이미 존재하는 가게입니다.");
-
-            System.out.println("@@@@@@@@@@@@@@@@@@@이미 존재하는 가게입니다.");
+            for(Explore explore : find) {
+                if (dto.getName().equals(explore.getName())) {
+                    log.info("@@@@@@@@@@@@@@@@@@@이미 존재하는 가게입니다.");
+                    return;
+                }
+            }
         }
         exploreRepository.save(
                 Explore.builder()
@@ -62,7 +64,7 @@ public class ExploreService {
     }
 
     @Transactional
-    public void crawlingSparrowClub() throws Exception {
+    public void crawlingSparrowClub() {
         int i = 1;
         while(true) {
             String url = "https://ppseoul.com/map/?sort=TIME&keyword_type=all&page="+ i;
@@ -108,9 +110,14 @@ public class ExploreService {
 //                    System.out.println("phone: "+k.select("p.tell a").text().replaceAll("phone number",""));
 //                    System.out.println("img: "+k.select("a div.thumb img").attr("src"));
 //                    System.out.println("tag: "+k.select("a._fade_link em").html());
-                    HashMap<String, Double> location =
-                            (HashMap<String, Double>) googleGeocodingService.geocoding(k.select("p.adress").html());
-                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    HashMap<String, Double> location;
+                    try {
+                        location =
+                                (HashMap<String, Double>) googleGeocodingService.geocoding(k.select("p.adress").html());
+                    }catch (Exception e){
+                        log.info("Gecoding 오류 나옴~~~~~ "+ e);
+                        continue;
+                    }
                     System.out.println("lng = " + location.get("lng"));
                     System.out.println("lat = " + location.get("lat"));
 
