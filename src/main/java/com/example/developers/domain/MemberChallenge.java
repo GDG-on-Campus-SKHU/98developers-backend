@@ -39,6 +39,10 @@ public class MemberChallenge {
         this.image = imageSrc;
     }
 
+    public void changeIsSuccess(boolean isSuccess){
+        this.isSuccess = isSuccess;
+    }
+
     public ChallengeMemberDTO challengeToDTO() {
         return ChallengeMemberDTO.builder()
                 .member(member.toDTO())
