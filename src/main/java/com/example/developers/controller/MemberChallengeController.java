@@ -1,16 +1,11 @@
 package com.example.developers.controller;
 
-import com.example.developers.DTO.ChallengeDTO;
-import com.example.developers.DTO.ChangeMemberChallengeDTO;
+import com.example.developers.DTO.ChallengeMemberDTO;
 import com.example.developers.domain.Member;
-import com.example.developers.service.ChallengeService;
 import com.example.developers.service.MemberChallengeService;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,12 +46,12 @@ public class MemberChallengeController {
     public ResponseEntity<String> changeMemberChallenge(
             Authentication authentication,
             @PathVariable Long challengeId,
-            @RequestBody List<ChangeMemberChallengeDTO> uids
+            @RequestBody List<ChallengeMemberDTO> members
     ) {
         Member member = ((Member) authentication.getPrincipal());
         if (!member.getRoles().get(0).equals("ADMIN"))
             throw new RuntimeException(String.format("접근할 수 없는 권한입니다."));
-        memberChallengeService.changeMemberChallenge(uids,challengeId);
+        memberChallengeService.changeMemberChallenge(members,challengeId);
         return ResponseEntity.ok("attend user challenge");
     }
 }

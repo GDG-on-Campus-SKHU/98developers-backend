@@ -1,6 +1,6 @@
 package com.example.developers.service;
 
-import com.example.developers.DTO.ChangeMemberChallengeDTO;
+import com.example.developers.DTO.ChallengeMemberDTO;
 import com.example.developers.domain.Challenge;
 import com.example.developers.domain.Member;
 import com.example.developers.domain.MemberChallenge;
@@ -71,11 +71,11 @@ public class MemberChallengeService {
         );
     }
 
-    public void changeMemberChallenge(List<ChangeMemberChallengeDTO> uids, Long challengeId){
-        for(ChangeMemberChallengeDTO uid : uids) {
-            Member m = memberService.loadUserByUsername(uid.getUid());
+    public void changeMemberChallenge(List<ChallengeMemberDTO> uids, Long challengeId){
+        for(ChallengeMemberDTO uid : uids) {
+            Member m = memberService.loadUserByUsername(uid.getMember().getUid());
             MemberChallenge memberChallenge = findByChallengeAndMember(challengeId,m.getId());
-            memberChallenge.changeIsSuccess(uid.isSuccess());
+            memberChallenge.changeIsSuccess(uid.getSuccess());
             memberChallengeRepository.save(memberChallenge);
         }
     }
