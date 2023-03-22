@@ -54,7 +54,7 @@ public class MemberChallengeController {
             @RequestBody List<ChangeMemberChallengeDTO> uids
     ) {
         Member member = ((Member) authentication.getPrincipal());
-        if (!member.getAuthorities().equals("ADMIN"))
+        if (!member.getRoles().get(0).equals("ADMIN"))
             throw new RuntimeException(String.format("접근할 수 없는 권한입니다."));
         memberChallengeService.changeMemberChallenge(uids,challengeId);
         return ResponseEntity.ok("attend user challenge");

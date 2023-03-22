@@ -12,5 +12,5 @@ public class ChallengeMemberDTO {
 
     String image;
 
-    Boolean isSuccess;
+    Boolean success;
 }

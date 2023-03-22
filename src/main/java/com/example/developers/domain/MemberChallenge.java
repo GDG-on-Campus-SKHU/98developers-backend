@@ -33,21 +33,21 @@ public class MemberChallenge {
 
     @Column
     @ColumnDefault("false")
-    private Boolean isSuccess;
+    private Boolean success;
 
     public void imageUpdate(String imageSrc) {
         this.image = imageSrc;
     }
 
-    public void changeIsSuccess(boolean isSuccess){
-        this.isSuccess = isSuccess;
+    public void changeIsSuccess(boolean success){
+        this.success = success;
     }
 
     public ChallengeMemberDTO challengeToDTO() {
         return ChallengeMemberDTO.builder()
                 .member(member.toDTO())
                 .image(image)
-                .isSuccess(isSuccess)
+                .success(success)
                 .build();
     }
 

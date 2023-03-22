@@ -66,7 +66,7 @@ public class MemberChallengeService {
                 MemberChallenge.builder()
                         .challenge(challenge)
                         .member(member)
-                        .isSuccess(false)
+                        .success(false)
                         .build()
         );
     }
