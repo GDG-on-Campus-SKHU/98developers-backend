@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,12 +47,15 @@ public class MemberChallengeController {
     }
 
 
-    @PostMapping(value = "/challenges/{challengeId}/change", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping( "/api/challenge/{challengeId}/change")
     public ResponseEntity<String> changeMemberChallenge(
+            Authentication authentication,
             @PathVariable Long challengeId,
-
             @RequestBody List<ChangeMemberChallengeDTO> uids
     ) {
+        Member member = ((Member) authentication.getPrincipal());
+        if (!member.getAuthorities().equals("ADMIN"))
+            throw new RuntimeException(String.format("접근할 수 없는 권한입니다."));
         memberChallengeService.changeMemberChallenge(uids,challengeId);
         return ResponseEntity.ok("attend user challenge");
     }

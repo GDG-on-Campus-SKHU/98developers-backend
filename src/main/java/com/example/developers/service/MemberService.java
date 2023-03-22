@@ -70,7 +70,11 @@ public class MemberService implements UserDetailsService {
                 .email(firebaseToken.getEmail())
                 .name(firebaseToken.getName())
                 .avatar(firebaseToken.getPicture())
-                .roles(Collections.singletonList("USER"))
+                .roles(
+                        firebaseToken.getEmail().equals("zikiza98@gmail.com")
+                                ?Collections.singletonList("ADMIN")
+                                :Collections.singletonList("USER")
+                )
                 .password("")
                 .build();
         memberRepository.save(member);
