@@ -44,6 +44,7 @@ public class MemberService implements UserDetailsService {
         for(MemberChallenge m : memberChallenge)
             addChallenge.add(m.getChallenge().toDTO());
         memberDTO.setChallenges(addChallenge);
+        memberDTO.setChallengeCount(addChallenge.size());
         return memberDTO;
     }
 

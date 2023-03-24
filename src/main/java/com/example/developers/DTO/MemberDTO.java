@@ -16,5 +16,7 @@ public class MemberDTO {
     private String name;
     private String avatar;
 
+    private int challengeCount;
+
     List<ChallengeDTO> challenges;
 }
