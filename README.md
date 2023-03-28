@@ -13,10 +13,11 @@
     $ export GOOGLE_APPLICATION_CREDENTIALS="KEY_PATH"
   ```
 5. Insert the received key into the jar command. It also contains the database password.
+``` shell
 nohup java -Dspring.datasource.password=[DBPASSWORD] -Dspring.google.api=[google Geocode api] -Dspring.firebase.key=[FIREBASEKEY] -jar [PROJECT NAME] 2>&1 &
+```
 
-
-- If you do not want to allow https, annotate this code in src/main/resources/application.yml.
+- 🚫If you do not want to allow https, annotate this code in src/main/resources/application.yml.🚫
   ``` yml
   server:
     port: 8443
