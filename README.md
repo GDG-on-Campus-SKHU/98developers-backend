@@ -1,4 +1,4 @@
-## Getting Start
+## Getting Started
 
 | tool | version |
 | :---: | :------: |
